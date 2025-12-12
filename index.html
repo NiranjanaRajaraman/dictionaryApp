@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Dictionary App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="dictionary-card">
+            <h1>AWS Dictionary</h1>
+            <input type="text" id="wordInput" placeholder="Type a word..." />
+            <button onclick="getDefinition()">Search</button>
+            <div class="definition" id="definition"></div>
+            <div class="error" id="error"></div>
+        </div>
+    </div>
+
+    <script>
+        async function getDefinition() {
+            const word = document.getElementById('wordInput').value.trim();
+            const defDiv = document.getElementById('definition');
+            const errorDiv = document.getElementById('error');
+
+            // Clear previous messages
+            defDiv.innerHTML = '';
+            errorDiv.innerHTML = '';
+
+            if (!word) {
+                errorDiv.textContent = 'Please enter a word!';
+                return;
+            }
+
+            // Show loading
+            defDiv.textContent = "Loading...";
+
+            const API_URL = "https://oi5pc283hj.execute-api.eu-west-1.amazonaws.com/default/nira-glossary-function?word=" 
+                            + encodeURIComponent(word);
+
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+
+                // If Lambda returned error
+                if (data.error) {
+                    defDiv.innerHTML = '';
+                    errorDiv.textContent = data.error;
+                    return;
+                }
+
+                // Show definition
+                defDiv.innerHTML = `
+                    <h2>${data.word}</h2>
+                    <p><strong>Definition:</strong> ${data.definition}</p>
+                `;
+
+            } catch (e) {
+                defDiv.innerHTML = '';
+                errorDiv.textContent = "Unable to fetch definition.";
+            }
+        }
+    </script>
+
+</body>
+</html>

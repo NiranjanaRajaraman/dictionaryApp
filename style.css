@@ -1,0 +1,110 @@
+/* Body & App Container */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Dictionary Card */
+.dictionary-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    width: 500px;
+    max-width: 90%;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* center content horizontally */
+    text-align: center;
+}
+
+/* Heading */
+.dictionary-card h1 {
+    color: #007BFF;
+    margin-bottom: 20px;
+}
+
+/* Input Field */
+input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 8px rgba(0,123,255,0.3);
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background-color: #007BFF;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 20px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Definitions */
+.definition {
+    width: 100%;
+    text-align: left;
+    color: #333;
+}
+
+.part-of-speech {
+    font-weight: bold;
+    color: #007BFF;
+    margin-top: 10px;
+    font-size: 1.1rem;
+}
+
+.single-definition {
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+/* Error Message */
+.error {
+    color: red;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+    .dictionary-card {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .dictionary-card h1 {
+        font-size: 2rem;
+    }
+}
