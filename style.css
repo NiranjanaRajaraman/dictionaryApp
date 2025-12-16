@@ -11,33 +11,40 @@ body {
 
 .app-container {
     display: flex;
+    flex-direction: column; /* stack cards vertically by default */
     justify-content: center;
     align-items: center;
     width: 100%;
+    gap: 30px; /* space between cards */
 }
 
-/* Dictionary Card */
-.dictionary-card {
+/* Dictionary & Subscribe Cards */
+.dictionary-card, .subscribe-card {
     background: #fff;
     border-radius: 15px;
     padding: 30px;
-    width: 500px;
+    width: 400px;
     max-width: 90%;
     box-shadow: 0 15px 40px rgba(0,0,0,0.2);
     display: flex;
     flex-direction: column;
-    align-items: center; /* center content horizontally */
+    align-items: center;
     text-align: center;
 }
 
-/* Heading */
+/* Heading Styles */
 .dictionary-card h1 {
     color: #007BFF;
     margin-bottom: 20px;
 }
 
-/* Input Field */
-input[type="text"] {
+.subscribe-card h2 {
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+/* Inputs & Buttons */
+input[type="text"], input[type="email"] {
     width: 100%;
     padding: 12px 15px;
     border-radius: 10px;
@@ -53,58 +60,61 @@ input[type="text"]:focus {
     box-shadow: 0 0 8px rgba(0,123,255,0.3);
 }
 
-/* Button */
+input[type="email"]:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 8px rgba(40,167,69,0.3);
+}
+
 button {
     width: 100%;
     padding: 12px;
     border-radius: 10px;
     border: none;
-    background-color: #007BFF;
-    color: #fff;
     font-size: 1rem;
     cursor: pointer;
     transition: 0.3s;
+}
+
+.dictionary-card button {
+    background-color: #007BFF;
+    color: #fff;
     margin-bottom: 20px;
 }
 
-button:hover {
+.dictionary-card button:hover {
     background-color: #0056b3;
 }
 
-/* Definitions */
+.subscribe-card button {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.subscribe-card button:hover {
+    background-color: #1e7e34;
+}
+
+/* Definitions & Messages */
 .definition {
     width: 100%;
     text-align: left;
     color: #333;
 }
 
-.part-of-speech {
-    font-weight: bold;
-    color: #007BFF;
-    margin-top: 10px;
-    font-size: 1.1rem;
-}
-
-.single-definition {
-    margin-left: 15px;
-    margin-top: 5px;
-}
-
-/* Error Message */
 .error {
     color: red;
     margin-top: 10px;
     font-weight: bold;
 }
 
-/* Responsive */
-@media (max-width: 400px) {
-    .dictionary-card {
-        width: 90%;
-        padding: 20px;
-    }
+.subscribe-message {
+    margin-top: 10px;
+    font-weight: bold;
+}
 
-    .dictionary-card h1 {
-        font-size: 2rem;
+/* Responsive: make cards side by side on wider screens */
+@media (min-width: 900px) {
+    .app-container {
+        flex-direction: row;
     }
 }
