@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -45,7 +45,9 @@
 
                 // If Lambda returned error
                 if (data.error) {
-                    defDiv.innerHTML = '';
+                    defDiv.innerHTML = `
+                   <p style=" text-align: center;"><a href="https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html"><bold>Refer to aws glossary</bold></a></p
+                `;
                     errorDiv.textContent = data.error;
                     return;
                 }
@@ -60,6 +62,118 @@
                 defDiv.innerHTML = '';
                 errorDiv.textContent = "Unable to fetch definition.";
             }
+        }
+    </script>
+
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Dictionary App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Dictionary Card -->
+        <div class="dictionary-card">
+            <h1>AWS Dictionary</h1>
+            <input type="text" id="wordInput" placeholder="Type a word..." />
+            <button onclick="getDefinition()">Search</button>
+            <div class="definition" id="definition"></div>
+            <div class="error" id="error"></div>
+        </div>
+
+        <!-- Email Subscription Card -->
+        <div class="subscribe-card">
+            <h2>Subscribe to Updates</h2>
+            <input type="email" id="emailInput" placeholder="Enter your email..." />
+            <button onclick="subscribeEmail()">Subscribe</button>
+            <div class="subscribe-message" id="subscribeMessage"></div>
+        </div>
+    </div>
+
+    <script>
+        async function getDefinition() {
+            const word = document.getElementById('wordInput').value.trim();
+            const defDiv = document.getElementById('definition');
+            const errorDiv = document.getElementById('error');
+
+            defDiv.innerHTML = '';
+            errorDiv.innerHTML = '';
+
+            if (!word) {
+                errorDiv.textContent = 'Please enter a word!';
+                return;
+            }
+
+            defDiv.textContent = "Loading...";
+
+            const API_URL = "https://oi5pc283hj.execute-api.eu-west-1.amazonaws.com/default/nira-glossary-function?word=" 
+                            + encodeURIComponent(word);
+
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+
+                if (data.error) {
+                    defDiv.innerHTML = `<p style=" text-align: center;">
+                        <a href="https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html"><b>Refer to AWS glossary</b></a>
+                    </p>`;
+                    errorDiv.textContent = data.error;
+                    return;
+                }
+
+                defDiv.innerHTML = `<h2>${data.word}</h2>
+                    <p><strong>Definition:</strong> ${data.definition}</p>`;
+            } catch (e) {
+                defDiv.innerHTML = '';
+                errorDiv.textContent = "Unable to fetch definition.";
+            }
+        }
+
+        async function subscribeEmail() {
+            const emailInput = document.getElementById('emailInput').value.trim();
+            const messageDiv = document.getElementById('subscribeMessage');
+
+            messageDiv.innerHTML = '';
+            if (!emailInput) {
+                messageDiv.textContent = 'Please enter an email!';
+                messageDiv.style.color = 'red';
+                return;
+            }
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(emailInput)) {
+                messageDiv.textContent = 'Please enter a valid email!';
+                messageDiv.style.color = 'red';
+                return;
+            }
+
+            const API_SUBSCRIBE_URL = "https://4km4cnxnj8.execute-api.eu-west-1.amazonaws.com/default/subscribe-function?email=" + encodeURIComponent(emailInput); // Replace with actual subscription API
+
+            try {
+                const response = await fetch(API_SUBSCRIBE_URL);
+                // const data = await response.json();
+
+                if (response.ok === false) {
+                    messageDiv.textContent = "Subscription failed.";
+                    messageDiv.style.color = 'red';
+                    return;
+                }
+            } 
+            catch (e) {
+                messageDiv.textContent = 'Subscription failed. Please try again later.';
+                messageDiv.style.color = 'red';
+                return;
+            }
+
+            messageDiv.textContent = 'Thank you for subscribing!';
+            messageDiv.style.color = 'green';
+            document.getElementById('emailInput').value = '';
         }
     </script>
 
