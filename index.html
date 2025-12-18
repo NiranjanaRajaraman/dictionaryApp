@@ -126,9 +126,12 @@
                     errorDiv.textContent = data.error;
                     return;
                 }
-
-                defDiv.innerHTML = `<h2>${data.word}</h2>
-                    <p><strong>Definition:</strong> ${data.definition}</p>`;
+                let html= `<h2>${data.word}</h2>
+                    <p><strong>Definition:</strong> ${data.definition}</p>`
+                if (data.relatedTerms && data.relatedTerms.length > 0) {
+                    html += `<p><strong>Other related terms: </strong> ${data.relatedTerms}</p>`;
+                }    
+                defDiv.innerHTML = html;
             } catch (e) {
                 defDiv.innerHTML = '';
                 errorDiv.textContent = "Unable to fetch definition.";
