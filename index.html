@@ -132,6 +132,7 @@
                     html += `<p><strong>Other related terms: </strong> ${data.relatedTerms}</p>`;
                 }    
                 defDiv.innerHTML = html;
+                wordInput.value = '';
             } catch (e) {
                 defDiv.innerHTML = '';
                 errorDiv.textContent = "Unable to fetch definition.";
@@ -185,3 +186,4 @@
 
 </body>
 </html>
+
