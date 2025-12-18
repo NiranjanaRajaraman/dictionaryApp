@@ -157,13 +157,18 @@
 
             try {
                 const response = await fetch(API_SUBSCRIBE_URL);
-                // const data = await response.json();
+                const body = await response.json();
+                console.log(body);
 
                 if (response.ok === false) {
-                    messageDiv.textContent = "Subscription failed.";
+                    messageDiv.textContent = "Subscription failed. Please try again later.";
                     messageDiv.style.color = 'red';
                     return;
                 }
+                messageDiv.textContent = body;
+                messageDiv.style.color = 'green';
+                document.getElementById('emailInput').value = '';
+                return;
             } 
             catch (e) {
                 messageDiv.textContent = 'Subscription failed. Please try again later.';
@@ -171,9 +176,7 @@
                 return;
             }
 
-            messageDiv.textContent = 'Thank you for subscribing!';
-            messageDiv.style.color = 'green';
-            document.getElementById('emailInput').value = '';
+            
         }
     </script>
 
