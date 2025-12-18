@@ -148,8 +148,8 @@
                 messageDiv.textContent = 'Please enter an email!';
                 messageDiv.style.color = 'red';
                 return;
-            }
-
+             }
+            messageDiv.innerHTML = '';
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailPattern.test(emailInput)) {
                 messageDiv.textContent = 'Please enter a valid email!';
@@ -186,4 +186,5 @@
 
 </body>
 </html>
+
 
