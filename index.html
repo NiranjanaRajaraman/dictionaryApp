@@ -214,8 +214,8 @@ async function getDefinition() {
 
     // Backend API (Glossary + Translate)
     const API_URL =
-        // "https://oi5pc283hj.execute-api.eu-west-1.amazonaws.com/default/nira-glossary-function"
-         "https://agcy6a603a.execute-api.eu-west-1.amazonaws.com/default/nira-translate-function"
+        "https://oi5pc283hj.execute-api.eu-west-1.amazonaws.com/default/nira-glossary-function"
+         //"https://agcy6a603a.execute-api.eu-west-1.amazonaws.com/default/nira-translate-function"
         + "?word=" + encodeURIComponent(word)
         + "&targetLanguage=" + encodeURIComponent(targetLanguage);
 
@@ -306,4 +306,5 @@ async function subscribeEmail() {
 
 </body>
 </html>
+
 
