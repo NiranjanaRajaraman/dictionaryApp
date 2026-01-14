@@ -18,6 +18,26 @@ body {
     gap: 30px; /* space between cards */
 }
 
+/* Language Dropdown */
+select {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    outline: none;
+    background-color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Focus effect similar to text input */
+select:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 8px rgba(0,123,255,0.3);
+}
+
 /* Dictionary & Subscribe Cards */
 .dictionary-card, .subscribe-card {
     background: #fff;
@@ -118,3 +138,4 @@ button {
         flex-direction: row;
     }
 }
+
